@@ -66,5 +66,5 @@ jobs:
         id: output
         run: |
           echo "Tags: ${{ steps.test-action.outputs.tags }}"
-          echo "Latest Tag: ${{ steps.test-action.outputs.latest-tag }}"
-          echo "Tag Count: ${{ steps.test-action.outputs.tag-count }}"
+          echo "Latest Tag: ${{ steps.test-action.outputs.latestTag }}"
+          echo "Tag Count: ${{ steps.test-action.outputs.tagCount }}"

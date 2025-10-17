@@ -30100,6 +30100,7 @@ function setOutputs(results, filteredTags) {
     coreExports.setOutput('tag-count', outputs.tagCount);
     coreExports.info(`✓ Found ${outputs.tagCount} tags`);
     if (outputs.tagCount > 0) {
+        coreExports.info('');
         coreExports.info(`Latest tag: ${outputs.latestTag}`);
         coreExports.info('');
         coreExports.info('All tags:');
