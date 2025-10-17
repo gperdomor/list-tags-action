@@ -57,8 +57,14 @@ jobs:
         id: test-action
         uses: ./
         with:
-          milliseconds: 2000
+          repository: 'gperdomor/nx-docker'
+          max-results: 150
+          filter: '^[0-9]+\.[0-9]+\.[0-9]+\-alpine$'
+          name: '-alpine'
 
       - name: Print Output
         id: output
-        run: echo "${{ steps.test-action.outputs.time }}"
+        run: |
+          echo "Tags: ${{ steps.test-action.outputs.tags }}"
+          echo "Latest Tag: ${{ steps.test-action.outputs.latestTag }}"
+          echo "Tag Count: ${{ steps.test-action.outputs.tagCount }}"

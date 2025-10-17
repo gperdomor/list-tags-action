@@ -1,17 +1,17 @@
 {
-  "name": "typescript-action",
+  "name": "list-tags-action",
   "description": "GitHub Actions TypeScript template",
   "version": "0.0.0",
   "author": "",
   "type": "module",
   "private": true,
-  "homepage": "https://github.com/actions/typescript-action",
+  "homepage": "https://github.com/gperdomor/list-tags-action",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/typescript-action.git"
+    "url": "git+https://github.com/gperdomor/list-tags-action.git"
   },
   "bugs": {
-    "url": "https://github.com/actions/typescript-action/issues"
+    "url": "https://github.com/gperdomor/list-tags-action/issues"
   },
   "keywords": [
     "actions"
@@ -37,7 +37,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.11.1"
+    "@actions/core": "^1.11.1",
+    "semver": "7.7.3"
   },
   "devDependencies": {
     "@eslint/compat": "^1.4.0",
@@ -48,6 +49,7 @@
     "@rollup/plugin-typescript": "^12.1.4",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.6.2",
+    "@types/semver": "7.7.1",
     "@typescript-eslint/eslint-plugin": "^8.45.0",
     "@typescript-eslint/parser": "^8.32.1",
     "eslint": "^9.36.0",
