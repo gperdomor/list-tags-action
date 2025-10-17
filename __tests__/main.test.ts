@@ -132,7 +132,19 @@ describe('main.ts', () => {
       expect(core.setOutput).toHaveBeenCalledWith('latest-tag', '2.0.0');
     });
 
-    it('should handle mixed semver and non-semver tags', async () => {
+    it('should fallback to lexicographic sort when semver fails', async () => {
+      const mockTags = [createMockTag('latest'), createMockTag('main'), createMockTag('dev'), createMockTag('beta')];
+
+      mockFetchTags.mockResolvedValue(mockTags);
+
+      await run();
+
+      expect(core.debug).toHaveBeenCalledWith(expect.stringContaining('Semver sort failed, using lexicographic sort'));
+      expect(core.setOutput).toHaveBeenCalledWith('tags', JSON.stringify(['beta', 'dev', 'latest', 'main']));
+      expect(core.setOutput).toHaveBeenCalledWith('latest-tag', 'main');
+    });
+
+    it('should handle mixed semver and non-semver tags with fallback', async () => {
       const mockTags = [
         createMockTag('v2.0.0'),
         createMockTag('latest'),
@@ -144,6 +156,9 @@ describe('main.ts', () => {
 
       await run();
 
+      expect(core.debug).toHaveBeenCalledWith(expect.stringContaining('Semver sort failed, using lexicographic sort'));
+      // Lexicographic sort
+      expect(core.setOutput).toHaveBeenCalledWith('tags', JSON.stringify(['latest', 'main', 'v1.0.0', 'v2.0.0']));
       expect(core.setOutput).toHaveBeenCalledWith('tag-count', 4);
     });
   });
@@ -197,7 +212,8 @@ describe('main.ts', () => {
     });
 
     it('should not apply filter when not provided', async () => {
-      const mockTags = [createMockTag('latest'), createMockTag('main'), createMockTag('v1.0.0')];
+      // const mockTags = [createMockTag('latest'), createMockTag('main'), createMockTag('v1.0.0')];
+      const mockTags = [createMockTag('v1.2.3'), createMockTag('v1.1.0'), createMockTag('v1.0.0')];
 
       mockFetchTags.mockResolvedValue(mockTags);
 

@@ -30138,8 +30138,14 @@ async function run() {
             coreExports.info(`Applying filter: ${inputs.filter}`);
             filteredTags = filterTags(uniqueTags, inputs.filter);
         }
-        // sort tags using semver if possible
-        filteredTags = semverExports.sort(filteredTags);
+        // Sort tags using semver if possible, fallback to lexicographic sort
+        try {
+            filteredTags = semverExports.sort(filteredTags);
+        }
+        catch (error) {
+            coreExports.debug(`Semver sort failed, using lexicographic sort: ${error}`);
+            filteredTags = filteredTags.sort();
+        }
         // Set outputs
         setOutputs(results, filteredTags);
     }

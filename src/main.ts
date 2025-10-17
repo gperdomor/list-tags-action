@@ -91,8 +91,13 @@ export async function run(): Promise<void> {
       filteredTags = filterTags(uniqueTags, inputs.filter);
     }
 
-    // sort tags using semver if possible
-    filteredTags = sort(filteredTags);
+    // Sort tags using semver if possible, fallback to lexicographic sort
+    try {
+      filteredTags = sort(filteredTags);
+    } catch (error) {
+      core.debug(`Semver sort failed, using lexicographic sort: ${error}`);
+      filteredTags = filteredTags.sort();
+    }
 
     // Set outputs
     setOutputs(results, filteredTags);
