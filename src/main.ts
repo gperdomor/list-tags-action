@@ -44,6 +44,7 @@ function setOutputs(results: DockerHubTag[], filteredTags: string[]): void {
 
   core.info(`✓ Found ${outputs.tagCount} tags`);
   if (outputs.tagCount > 0) {
+    core.info('');
     core.info(`Latest tag: ${outputs.latestTag}`);
     core.info('');
     core.info('All tags:');
