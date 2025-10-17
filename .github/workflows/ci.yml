@@ -57,7 +57,10 @@ jobs:
         id: test-action
         uses: ./
         with:
-          milliseconds: 2000
+          repository: 'gperdomor/nx-docker'
+          max-results: 150
+          filter: '^[0-9]+\.[0-9]+\.[0-9]+\-alpine$'
+          name: '-alpine'
 
       - name: Print Output
         id: output

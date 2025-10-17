@@ -195,7 +195,6 @@ describe('main.ts', () => {
       core.getInput.mockImplementation((name: string) => {
         const inputs: Record<string, string> = {
           repository: 'nginx',
-          'max-results': '200',
           filter: '[invalid(regex',
         };
         return inputs[name] || '';
@@ -212,8 +211,7 @@ describe('main.ts', () => {
     });
 
     it('should not apply filter when not provided', async () => {
-      // const mockTags = [createMockTag('latest'), createMockTag('main'), createMockTag('v1.0.0')];
-      const mockTags = [createMockTag('v1.2.3'), createMockTag('v1.1.0'), createMockTag('v1.0.0')];
+      const mockTags = [createMockTag('latest'), createMockTag('main'), createMockTag('v1.0.0')];
 
       mockFetchTags.mockResolvedValue(mockTags);
 

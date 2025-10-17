@@ -18,11 +18,7 @@ function getInputs(): ActionInputs {
 /**
  * Filter tags based on regex pattern
  */
-function filterTags(tags: string[], pattern?: string): string[] {
-  if (!pattern) {
-    return tags;
-  }
-
+function filterTags(tags: string[], pattern: string): string[] {
   try {
     const regex = new RegExp(pattern);
     return tags.filter((tag) => regex.test(tag));

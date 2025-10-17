@@ -30077,9 +30077,6 @@ function getInputs() {
  * Filter tags based on regex pattern
  */
 function filterTags(tags, pattern) {
-    if (!pattern) {
-        return tags;
-    }
     try {
         const regex = new RegExp(pattern);
         return tags.filter((tag) => regex.test(tag));
