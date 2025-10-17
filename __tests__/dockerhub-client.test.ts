@@ -3,6 +3,7 @@
  */
 import type { HttpClient, HttpClientResponse } from '@actions/http-client';
 import { jest } from '@jest/globals';
+import * as http from 'http';
 import * as core from '../__fixtures__/core.js';
 import type { ActionInputs, DockerHubAuthResponse, DockerHubTag, DockerHubTagsResponse } from '../src/types.js';
 
@@ -40,7 +41,7 @@ describe('DockerHubClient', () => {
         readBody: jest.fn<() => Promise<string>>().mockResolvedValue(JSON.stringify(mockAuthResponse)),
         message: {
           statusCode: 200,
-        } as any,
+        } as http.IncomingMessage,
       };
 
       mockPost.mockResolvedValue(mockResponse as HttpClientResponse);
@@ -63,7 +64,7 @@ describe('DockerHubClient', () => {
         readBody: jest.fn<() => Promise<string>>().mockResolvedValue(JSON.stringify(mockAuthResponse)),
         message: {
           statusCode: 401,
-        } as any,
+        } as http.IncomingMessage,
       };
 
       mockPost.mockResolvedValue(mockResponse as HttpClientResponse);
@@ -117,7 +118,7 @@ describe('DockerHubClient', () => {
       message: {
         statusCode: 200,
         statusMessage: 'OK',
-      } as any,
+      } as http.IncomingMessage,
     });
 
     it('should fetch tags for official repository', async () => {
@@ -173,7 +174,7 @@ describe('DockerHubClient', () => {
         readBody: jest.fn<() => Promise<string>>().mockResolvedValue(JSON.stringify(mockAuthResponse)),
         message: {
           statusCode: 200,
-        } as any,
+        } as http.IncomingMessage,
       };
 
       mockPost.mockResolvedValue(mockAuthResponseObj as HttpClientResponse);
@@ -317,7 +318,7 @@ describe('DockerHubClient', () => {
         message: {
           statusCode: 404,
           statusMessage: 'Not Found',
-        } as any,
+        } as http.IncomingMessage,
       };
 
       mockGet.mockResolvedValue(mockResponse as HttpClientResponse);
@@ -335,7 +336,7 @@ describe('DockerHubClient', () => {
         readBody: jest.fn<() => Promise<string>>().mockResolvedValue(JSON.stringify({ invalid: 'response' })),
         message: {
           statusCode: 200,
-        } as any,
+        } as http.IncomingMessage,
       };
 
       mockGet.mockResolvedValue(mockResponse as HttpClientResponse);
