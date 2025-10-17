@@ -1,6 +1,6 @@
-name: The name of your action here
-description: Provide a description here
-author: Your name or organization here
+name: 'Fetch Docker Hub Tags'
+description: 'Fetch tag versions of container images published on Docker Hub'
+author: 'gperdomor'
 
 # Add your action's branding here. This will appear on the GitHub Marketplace.
 branding:
@@ -9,15 +9,40 @@ branding:
 
 # Define your inputs here.
 inputs:
-  milliseconds:
-    description: Your input description here
+  repository:
+    description: 'Docker Hub repository name (e.g., "gperdomor/nx-podman" or just "nginx" for official images)'
     required: true
-    default: '1000'
+  username:
+    description: 'Docker Hub username for authentication (optional for public repos)'
+    required: false
+  password:
+    description: 'Docker Hub password or access token for authentication (optional for public repos)'
+    required: false
+  max-results:
+    description: 'Maximum number of tags to fetch'
+    required: false
+    default: '200'
+  filter:
+    description: 'Filter tags using regex pattern (e.g., "^v?[0-9]+\.[0-9]+\.[0-9]+$" for semver only)'
+    required: false
+    default: ''
+  ordering:
+    description: 'Ordering of the results (e.g., "last_updated")'
+    required: false
+    default: 'last_updated'
+  name:
+    description: 'Name filter for the results (e.g., "alpine")'
+    required: false
+    default: ''
 
 # Define your outputs here.
 outputs:
-  time:
-    description: Your output description here
+  tags:
+    description: 'Comma-separated list of fetched tags'
+  latestTag:
+    description: 'The latest tag based on the specified ordering'
+  tagCount:
+    description: 'Total number of tags fetched'
 
 runs:
   using: node24
